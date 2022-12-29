@@ -16,7 +16,7 @@ client = tweepy.Client(
 )
 
 # Set the search term and time span
-query = '(Geometry Nodes OR geonodes OR geometry nodes) -is:retweet'
+query = '(Geometry Nodes OR geonodes OR geometrynodes) -is:retweet'
 
 st.title('Geometry Nodes over the Last 7 Days')
 
