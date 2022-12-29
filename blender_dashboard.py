@@ -1,9 +1,8 @@
 import streamlit as st
 import tweepy
 import pandas as pd
-import streamlit.components.v1 as components
+import datetime
 
-st.set_page_config(layout="wide")
 # Enter your API keys and secrets here
 consumer_key = 'jIOfcFvFLUSPaQ4CoYtLuEA5E'
 consumer_secret = '1HBuH1xJPyWW1580NEkrKTkuR83tjqgU0kgvKmWth0sdFCdyiG'
@@ -17,6 +16,7 @@ client = tweepy.Client(
 # Set the search term and time span
 query = '(Geometry Nodes OR geonodes OR geometry nodes) -is:retweet'
 
+st.set_page_config(layout="wide")
 st.title('Geometry Nodes over the Last 7 Days')
 
 def search_and_rank_tweets():
@@ -48,34 +48,54 @@ def search_and_rank_tweets():
 
   df.to_csv('tweet_ranking.csv', index=False)
 
-  return df
+  # Update the search date file
+  with open('search_date.txt', 'w') as f:
+    f.write(datetime.datetime.now().strftime("%A %d %B %Y, %H:%M"))
 
+# Read the search date from the file
+try:
+  with open('search_date.txt', 'r') as f:
+    search_date = f.read()
+except:
+  search_date = 'No previous search'
 
-if st.button('Generate data'):
+# Display the search date
+st.markdown(f'Last search: {search_date}')
 
-  # Display the top tweets
+# Get the current date and time
+current_datetime = datetime.datetime.now()
+
+# Get the color for the generate data button based on the time difference between the current date and the search date
+button_color = '#00e676'  # green
+try:
+  search_datetime = datetime.datetime.strptime(search_date, "%A %d %B %Y, %H:%M")
+  time_difference = current_datetime - search_datetime
+  if time_difference.total_seconds() > 3600:  # more than 1 hour
+    button_color = '#ff1744'  # red
+except:
+  pass
+
+if st.button('Generate data', button_color=button_color):
   search_and_rank_tweets()
-  
 
+# Load the top tweets from the CSV file
 df = pd.read_csv('tweet_ranking.csv')
 
 try:
+    # Get the number of tweets to show from the slider
     n = st.slider('Number of tweets to show', 10, 100)
+
+    # Add a checkbox to filter the dataframe to only show entries with engagement scores >= 1
     filter_engagement = st.checkbox('Filter by engagement score')
     if filter_engagement:
         f = st.slider('filter engagement higher than:', 0, 10)
-        df = df[df['engagement_score'] >= f]  
+        df = df[df['engagement_score'] >= f]
+
+    # Display the top tweets
     st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']][:n],
-                width=1000, height=300)
+                 width=1000, height=300)
     st.markdown(f'Showing top {len(df)} tweets')
 
-    
-    
-
-except:
-    st.write("Please Generate Data")
-
-
-
-st.write("Reddit Feed")
-components.iframe("https://twitter.com/VadimIgnatievCG/status/1608496098150318081")
+except Exception as e:
+  st.write("Please Generate Data")
+  st.write(e)
