@@ -47,15 +47,21 @@ def search_and_rank_tweets():
 
   return df
 
+df=[]
+
 if st.button('Generate data'):
-  # Get the number of tweets to show from the slider
-  n = st.slider('Number of tweets to show', 10, 100)
 
   # Display the top tweets
   df = search_and_rank_tweets()
-  st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']],
+  
+  
+
+
+n = st.slider('Number of tweets to show', 10, 100)
+st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']],
                width=700, height=300)
-  st.markdown(f'Showing top {n} tweets')
+
+st.markdown(f'Showing top {n} tweets')
 
 
 st.write("Reddit Feed")
