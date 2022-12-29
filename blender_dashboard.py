@@ -1,6 +1,7 @@
 import streamlit as st
 import tweepy
 import pandas as pd
+import streamlit.components.v1 as components
 
 # Enter your API keys and secrets here
 consumer_key = 'jIOfcFvFLUSPaQ4CoYtLuEA5E'
@@ -17,7 +18,6 @@ query = '(Geometry Nodes OR geonodes OR geometry nodes) -is:retweet'
 
 st.title('Geometry Nodes over the Last 7 Days')
 
-@st.cache
 def search_and_rank_tweets():
   # Search for tweets
   tweets = tweepy.Paginator(client.search_recent_tweets, query=query,
@@ -47,19 +47,16 @@ def search_and_rank_tweets():
 
   return df
 
-def display_top_tweets(n):
-  df = search_and_rank_tweets()
-
-  # Get the top n tweets
-  df_top_n = df.head(n)
-
-  # Display the top n tweets in a table
-  st.dataframe(df_top_n[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']],
-               width=700, height=300)
-
 if st.button('Generate data'):
   # Get the number of tweets to show from the slider
   n = st.slider('Number of tweets to show', 10, 100)
 
   # Display the top tweets
-  display_top_tweets(n)
+  df = search_and_rank_tweets()
+  st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']],
+               width=700, height=300)
+  st.markdown(f'Showing top {n} tweets')
+
+
+st.write("Reddit Feed")
+components.iframe("https://www.reddit.com/r/blender/search/?q=geometry%20nodes&restrict_sr=1&sr_nsfw=&sort=top&t=week")
