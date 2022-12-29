@@ -60,11 +60,16 @@ df = pd.read_csv('tweet_ranking.csv')
 
 try:
     n = st.slider('Number of tweets to show', 10, 100)
+    filter_engagement = st.checkbox('Filter by engagement score')
+    if filter_engagement:
+        f = st.slider('filter engagement higher than:', 0, 10)
+        df = df[df['engagement_score'] >= f]  
     st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']][:n],
                 width=700, height=300)
     st.markdown(f'Showing top {n} tweets')
 
-    prune = st.checkbox('Prune Engagement')  
+    
+    
 
 except:
     st.write("Please Generate Data")
