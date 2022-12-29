@@ -55,11 +55,13 @@ if st.button('Generate data'):
   
   
 
-if df:
+try:
     n = st.slider('Number of tweets to show', 10, 100)
     st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']],
                 width=700, height=300)
     st.markdown(f'Showing top {n} tweets')
+except:
+    st.write("Please Generate Data")
 
 
 st.write("Reddit Feed")
