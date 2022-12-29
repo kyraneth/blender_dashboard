@@ -59,4 +59,4 @@ if st.button('Generate data'):
 
 
 st.write("Reddit Feed")
-components.iframe("https://www.reddit.com/r/blender/search/?q=geometry%20nodes&restrict_sr=1&sr_nsfw=&sort=top&t=week")
+components.iframe("https://www.reddit.com/r/blender")
