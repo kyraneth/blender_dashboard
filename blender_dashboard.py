@@ -17,9 +17,8 @@ query = '(Geometry Nodes OR geonodes OR geometry nodes) -is:retweet'
 
 st.title('Geometry Nodes over the Last 7 Days')
 
-if st.button('Generate data'):
-  st.write('Searching and ranking tweets...')
-
+@st.cache
+def search_and_rank_tweets():
   # Search for tweets
   tweets = tweepy.Paginator(client.search_recent_tweets, query=query,
                                        tweet_fields=['public_metrics'],
@@ -46,11 +45,21 @@ if st.button('Generate data'):
   # Sort the DataFrame by engagement score in descending order
   df.sort_values(by='engagement_score', ascending=False, inplace=True)
 
+  return df
+
+def display_top_tweets(n):
+  df = search_and_rank_tweets()
+
   # Get the top n tweets
-  n = st.slider('Number of tweets to show', 10, 100)
   df_top_n = df.head(n)
 
   # Display the top n tweets in a table
-  st.dataframe(df_top_n[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']])
+  st.dataframe(df_top_n[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']],
+               width=700, height=300)
 
-  st.write('Done!')
+if st.button('Generate data'):
+  # Get the number of tweets to show from the slider
+  n = st.slider('Number of tweets to show', 10, 100)
+
+  # Display the top tweets
+  display_top_tweets(n)
