@@ -23,7 +23,7 @@ st.title('Geometry Nodes over the Last 7 Days')
 def search_and_rank_tweets():
   # Search for tweets
   tweets = tweepy.Paginator(client.search_recent_tweets, query=query,
-                                       tweet_fields=['public_metrics'],
+                                       tweet_fields=['public_metrics','author_id','text','created_at'],
                                        max_results=100).flatten(limit=100000)
 
   tweet_data = []
