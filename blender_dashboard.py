@@ -55,7 +55,7 @@ if st.button('Generate data'):
   # Display the top tweets
   search_and_rank_tweets()
   
-  
+
 df = pd.read_csv('tweet_ranking.csv')
 
 try:
@@ -63,10 +63,13 @@ try:
     st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']][:n],
                 width=700, height=300)
     st.markdown(f'Showing top {n} tweets')
+
+    prune = st.checkbox('Prune Engagement')  
+
 except:
     st.write("Please Generate Data")
 
 
 
 st.write("Reddit Feed")
-components.iframe("https://www.reddit.com/r/blender")
+components.iframe("https://twitter.com/VadimIgnatievCG/status/1608496098150318081")
