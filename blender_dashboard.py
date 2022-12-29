@@ -3,6 +3,7 @@ import tweepy
 import pandas as pd
 import streamlit.components.v1 as components
 
+st.set_page_config(layout="wide")
 # Enter your API keys and secrets here
 consumer_key = 'jIOfcFvFLUSPaQ4CoYtLuEA5E'
 consumer_secret = '1HBuH1xJPyWW1580NEkrKTkuR83tjqgU0kgvKmWth0sdFCdyiG'
@@ -65,7 +66,7 @@ try:
         f = st.slider('filter engagement higher than:', 0, 10)
         df = df[df['engagement_score'] >= f]  
     st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']][:n],
-                width=700, height=300)
+                width=1000, height=300)
     st.markdown(f'Showing top {n} tweets')
 
     
