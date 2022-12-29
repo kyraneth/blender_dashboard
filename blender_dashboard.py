@@ -45,15 +45,18 @@ def search_and_rank_tweets():
   # Sort the DataFrame by engagement score in descending order
   df.sort_values(by='engagement_score', ascending=False, inplace=True)
 
+  df.to_csv('tweet_ranking.csv', index=False)
+
   return df
 
 
 if st.button('Generate data'):
 
   # Display the top tweets
-  df = search_and_rank_tweets()
+  search_and_rank_tweets()
   
-
+  
+df = pd.read_csv('tweet_ranking.csv')
 
 try:
     n = st.slider('Number of tweets to show', 10, 100)
@@ -63,10 +66,6 @@ try:
 except:
     st.write("Please Generate Data")
 
-if st.button('Refresh Range'):
-    st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']],
-                width=700, height=300)
-    st.markdown(f'Showing top {n} tweets')
 
 
 st.write("Reddit Feed")
