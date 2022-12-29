@@ -67,7 +67,7 @@ try:
         df = df[df['engagement_score'] >= f]  
     st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count']][:n],
                 width=1000, height=300)
-    st.markdown(f'Showing top {n} tweets')
+    st.markdown(f'Showing top {len(df)} tweets')
 
     
     
