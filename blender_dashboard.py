@@ -74,7 +74,7 @@ except:
 
 with tab1:
 
-  col1, col2 = st.columns(2)
+  col1, col2, col3 = st.columns(3)
   header=st.container()
   with header:
     with col1:
@@ -110,7 +110,9 @@ with tab1:
       with table:
         st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
                     width=1000, height=300)
-        st.markdown(f'Showing top {len(df[:n])} tweets')
+      with header:
+        with col3:
+          st.markdown(f'Showing top {len(df[:n])} tweets')
 
   except:
       st.write("Please Generate Data")
