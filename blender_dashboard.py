@@ -111,15 +111,9 @@ def search_rank_reddit():
   # Display the dataframe
   print(df_reddit)
 
-''''''''''''''''''
-'''''''''''''''
 
+#####GENERAL SECTION
 
-GENERAL SECTION
-
-
-'''''''''''''''
-''''''''''''''''''
 
 
 
@@ -236,9 +230,9 @@ with tab2:
       filter_engagement_2 = st.checkbox('Filter by engagement score')
       if filter_engagement_2:
           f_2 = st.slider('filter engagement higher than:', 0, 10)
-          df_2 = df[df['engagement_score'] >= f_2]  
+          df_2 = df_2[df_2['engagement_score'] >= f_2]  
       with table_2:
-        st.dataframe(df[['url', 'engagement_score', 'title', 'upvotes', 'comments', 'user', 'content']][:n],
+        st.dataframe(df_2[['url', 'engagement_score', 'title', 'upvotes', 'comments', 'user', 'content']][:n],
                      width=1000, height=300)
       with header_2:
         with col3_2:
