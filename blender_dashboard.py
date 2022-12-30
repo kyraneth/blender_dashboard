@@ -74,7 +74,7 @@ except:
 
 with tab1:
 
-  header=st.container
+  header=st.container()
   with header:
     with col1:
       if st.button('Generate data'):
