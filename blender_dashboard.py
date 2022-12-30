@@ -75,7 +75,7 @@ def search_rank_reddit():
                       user_agent='Blender_Data_Check')
 
   # Set up an empty list to store the data we retrieve
-  data = []
+  data_reddit = []
 
   # Set the search term and subreddit to search in
   search_term = 'geometry nodes OR geonodes OR geometry nodes'
@@ -90,26 +90,26 @@ def search_rank_reddit():
           'comments': submission.num_comments,
           'title': submission.title,
           'content': submission.selftext,
-          'url': submission.url,
+          'URL': submission.url,
           'engagement_score': (submission.score + submission.num_comments) / 2
       }
       # Add the dictionary to the list
-      data.append(submission_data)
+      data_reddit.append(submission_data)
 
   # Convert the list of dictionaries to a Pandas dataframe
-  df = pd.DataFrame(data)
+  df_reddit = pd.DataFrame(data_reddit)
 
   # Sort the dataframe by the "engagement_score" column in descending order
-  df = df.sort_values(by='engagement_score', ascending=False)
+  df_reddit = df_reddit.sort_values(by='engagement_score', ascending=False)
 
   search_date_reddit = datetime.datetime.now().strftime("%A %d %B %Y, %H:%M")
   with open('search_date_reddit.txt', 'w') as f:
     f.write(search_date_reddit)
 
-  df.to_csv('reddit_ranking.csv', index=False)
+  df_reddit.to_csv('reddit_ranking.csv', index=False)
 
   # Display the dataframe
-  print(df)
+  print(df_reddit)
 
 ''''''''''''''''''
 '''''''''''''''
