@@ -227,16 +227,16 @@ with tab2:
 
   try:
       n_2 = st.slider('Number of reddit posts to show', 10, 100)
-      filter_engagement_2 = st.checkbox('Filter by engagement score')
+      filter_engagement_2 = st.checkbox('Filter by engagement score reddit')
       if filter_engagement_2:
-          f_2 = st.slider('filter engagement higher than:', 0, 10)
+          f_2 = st.slider('filter engagement higher than reddit:', 0, 10)
           df_2 = df_2[df_2['engagement_score'] >= f_2]  
       with table_2:
-        st.dataframe(df_2[['url', 'engagement_score', 'title', 'upvotes', 'comments', 'user', 'content']][:n_2],
+        st.dataframe(df_2[['url']][:n_2],
                      width=1000, height=300)
       with header_2:
         with col3_2:
-          st.markdown(f'Showing top {len(df_2[:n_2])} tweets')
+          st.markdown(f'Showing top {len(df_2[:n_2])} reddit posts')
 
   except:
       st.write("Please Generate Data")
