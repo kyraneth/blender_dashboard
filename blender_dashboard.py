@@ -126,15 +126,10 @@ GENERAL SECTION
 st.title('Geometry Nodes over the Last 7 Days')
 tab1, tab2 = st.tabs(["Twitter", "Reddit"])
 
-''''''''''''''''''
-'''''''''''''''
 
 
-TWITTER SECTION
+#TWITTER SECTION
 
-
-'''''''''''''''
-''''''''''''''''''
 
 
 
@@ -192,15 +187,12 @@ with tab1:
   except:
       st.write("Please Generate Data")
 
-''''''''''''''''''
-'''''''''''''''
 
 
-REDDIT SECTION
+
+###REDDIT SECTION
 
 
-'''''''''''''''
-''''''''''''''''''
 
 try:
   with open('search_date_reddit.txt', 'r') as f:
