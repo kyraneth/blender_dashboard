@@ -204,7 +204,7 @@ with tab2:
 
   
   header_2=st.container()
-  with header:
+  with header_2:
     col1_2, col2_2, col3_2 = st.columns(3)
   with header_2:
     with col1_2:
