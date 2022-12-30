@@ -98,9 +98,10 @@ with tab1:
       if filter_engagement:
           f = st.slider('filter engagement higher than:', 0, 10)
           df = df[df['engagement_score'] >= f]  
-      container.st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
-                  width=1000, height=300)
-      st.markdown(f'Showing top {len(df[:n])} tweets')
+      with container:
+        st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
+                    width=1000, height=300)
+        st.markdown(f'Showing top {len(df[:n])} tweets')
 
   except:
       st.write("Please Generate Data")
