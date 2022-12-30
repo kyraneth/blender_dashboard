@@ -109,7 +109,7 @@ with tab1:
           df = df[df['engagement_score'] >= f]  
       with table:
         st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
-                    width=1000, height=300)
+                    use_container_width=True, width=1000, height=300)
       with header:
         with col3:
           st.markdown(f'Showing top {len(df[:n])} tweets')
