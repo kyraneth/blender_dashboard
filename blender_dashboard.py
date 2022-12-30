@@ -82,7 +82,7 @@ def search_rank_reddit():
   subreddit = 'blender'
 
   # Search for the given term in the subreddit
-  for submission in reddit.subreddit(subreddit).search(search_term, time_filter='week', limit=1000):
+  for submission in reddit.subreddit(subreddit).search(search_term, time_filter='week', limit=None):
       # For each submission, store the relevant data in a dictionary
       submission_data = {
           'user': submission.author,
