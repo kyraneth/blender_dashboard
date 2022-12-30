@@ -133,7 +133,7 @@ try:
   with open('search_date_twitter.txt', 'r') as f:
     search_date_twitter = f.read()
 except:
-  search_date_twitter = "No data generated yet"
+  search_date_twitter = "No Twitter data generated yet"
 
 with tab1:
 
@@ -150,7 +150,7 @@ with tab1:
 
   # Display the search date and a warning message if the data is more than 1 hour old
   table = st.container()
-  if "No data generated yet" in search_date_twitter:
+  if "No Twitter data generated yet" in search_date_twitter:
     st.write(search_date_twitter)
   else:
     current_date = datetime.datetime.now()
@@ -160,9 +160,9 @@ with tab1:
     with header:
       with col2:
         if time_difference.total_seconds() / 3600 > 1:
-          st.write(":red[Data might be out of date, generate data]")
+          st.write(":red[Twitter Data might be out of date, generate data]")
         else:
-          st.write(":green[Data less than 1 hour old]")
+          st.write(":green[Twitter Data less than 1 hour old]")
 
   df = pd.read_csv('tweet_ranking.csv')
 
@@ -170,7 +170,7 @@ with tab1:
       n = st.slider('Number of tweets to show', 10, 100)
       filter_engagement = st.checkbox('Filter by engagement score')
       if filter_engagement:
-          f = st.slider('filter engagement higher than:', 0, 10)
+          f = st.slider('filter twitter engagement higher than:', 0, 10)
           df = df[df['engagement_score'] >= f]  
       with table:
         st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
