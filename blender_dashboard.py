@@ -30,7 +30,7 @@ def search_and_rank_tweets():
 
   tweet_data = []
   for tweet in tweets:
-    user=client.get_user(tweet.author_id.id, user_fields=['username'])
+    user=client.get_user(tweet.author_id, user_fields=['username'])
     tweet_data.append({
       'URL': f"https://twitter.com/twitter/status/{tweet.id}",
       'tweet_author' : tweet['author_id'],
