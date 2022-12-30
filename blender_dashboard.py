@@ -233,7 +233,7 @@ with tab2:
           f_2 = st.slider('filter reddit engagement higher than:', 0, 10)
           df_2 = df_2[df_2['engagement_score'] >= f_2]  
       with table_2:
-        st.dataframe(df_2[['URL']][:n_2],
+        st.dataframe(df_2[['URL','engagement_score','title','upvotes','comments','user','content']][:n_2],
                      width=1000, height=300)
       with header_2:
         with col3_2:
@@ -241,3 +241,4 @@ with tab2:
 
   except:
       st.write("Please Generate Reddit Data")
+
