@@ -5,6 +5,7 @@ import datetime
 import streamlit.components.v1 as components
 
 st.set_page_config(layout="wide")
+tab1, tab2 = st.tabs(["Twitter", "Reddit"])
 # Enter your API keys and secrets here
 consumer_key = 'jIOfcFvFLUSPaQ4CoYtLuEA5E'
 consumer_secret = '1HBuH1xJPyWW1580NEkrKTkuR83tjqgU0kgvKmWth0sdFCdyiG'
@@ -30,11 +31,9 @@ def search_and_rank_tweets():
 
   tweet_data = []
   for tweet in tweets:
-    user=client.get_user(tweet.author_id, user_fields=['username'])
     tweet_data.append({
       'URL': f"https://twitter.com/twitter/status/{tweet.id}",
       'tweet_author' : tweet['author_id'],
-      'tweet_username' : user.username,
       'tweet_text' : tweet['text'],
       'created_at' : tweet['created_at'],
       'retweet_count': tweet['public_metrics']['retweet_count'],
@@ -71,34 +70,35 @@ try:
 except:
   search_date = "No data generated yet"
 
-if st.button('Generate data'):
+with tab1:
+  if st.button('Generate data'):
 
-  # Display the top tweets
-  search_and_rank_tweets()
+    # Display the top tweets
+    search_and_rank_tweets()
 
-# Display the search date and a warning message if the data is more than 1 hour old
-if "No data generated yet" in search_date:
-  st.write(search_date)
-else:
-  current_date = datetime.datetime.now()
-  search_date = datetime.datetime.strptime(search_date, "%A %d %B %Y, %H:%M")
-  time_difference = current_date - search_date
-  if time_difference.total_seconds() / 3600 > 1:
-    st.write("Data might be out of date, generate data")
+  # Display the search date and a warning message if the data is more than 1 hour old
+  if "No data generated yet" in search_date:
+    st.write(search_date)
   else:
-    st.write("Data less than 1 hour old")
+    current_date = datetime.datetime.now()
+    search_date = datetime.datetime.strptime(search_date, "%A %d %B %Y, %H:%M")
+    time_difference = current_date - search_date
+    if time_difference.total_seconds() / 3600 > 1:
+      st.write("Data might be out of date, generate data")
+    else:
+      st.write("Data less than 1 hour old")
 
-df = pd.read_csv('tweet_ranking.csv')
+  df = pd.read_csv('tweet_ranking.csv')
 
-try:
-    n = st.slider('Number of tweets to show', 10, 100)
-    filter_engagement = st.checkbox('Filter by engagement score')
-    if filter_engagement:
-        f = st.slider('filter engagement higher than:', 0, 10)
-        df = df[df['engagement_score'] >= f]  
-    st.dataframe(df[['URL', 'username', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
-                width=1000, height=300)
-    st.markdown(f'Showing top {len(df[:n])} tweets')
+  try:
+      n = st.slider('Number of tweets to show', 10, 100)
+      filter_engagement = st.checkbox('Filter by engagement score')
+      if filter_engagement:
+          f = st.slider('filter engagement higher than:', 0, 10)
+          df = df[df['engagement_score'] >= f]  
+      st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
+                  width=1000, height=300)
+      st.markdown(f'Showing top {len(df[:n])} tweets')
 
-except:
-    st.write("Please Generate Data")
+  except:
+      st.write("Please Generate Data")
