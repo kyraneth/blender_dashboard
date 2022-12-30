@@ -31,6 +31,7 @@ def search_and_rank_tweets():
     tweet_data.append({
       'URL': f"https://twitter.com/twitter/status/{tweet.id}",
       'tweet_author' : tweet['author_id'],
+      'tweet_username' : tweet['username']
       'tweet_text' : tweet['text'],
       'created_at' : tweet['created_at'],
       'retweet_count': tweet['public_metrics']['retweet_count'],
@@ -92,7 +93,7 @@ try:
     if filter_engagement:
         f = st.slider('filter engagement higher than:', 0, 10)
         df = df[df['engagement_score'] >= f]  
-    st.dataframe(df[['URL','tweet_author', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text']][:n],
+    st.dataframe(df[['URL', 'username', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
                 width=1000, height=300)
     st.markdown(f'Showing top {len(df[:n])} tweets')
 
