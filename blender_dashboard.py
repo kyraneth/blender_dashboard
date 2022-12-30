@@ -33,7 +33,7 @@ def search_and_rank_tweets():
     tweet_data.append({
       'URL': f"https://twitter.com/twitter/status/{tweet.id}",
       'tweet_author' : tweet['author_id'],
-      'tweet_username' : tweet['author_id']['username'],
+      'tweet_username' : tweet.author_id['username'],
       'tweet_text' : tweet['text'],
       'created_at' : tweet['created_at'],
       'retweet_count': tweet['public_metrics']['retweet_count'],
