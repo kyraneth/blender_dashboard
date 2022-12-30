@@ -78,6 +78,7 @@ with tab1:
     search_and_rank_tweets()
 
   # Display the search date and a warning message if the data is more than 1 hour old
+  container = st.container()
   if "No data generated yet" in search_date:
     st.write(search_date)
   else:
@@ -97,7 +98,7 @@ with tab1:
       if filter_engagement:
           f = st.slider('filter engagement higher than:', 0, 10)
           df = df[df['engagement_score'] >= f]  
-      st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
+      container.st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
                   width=1000, height=300)
       st.markdown(f'Showing top {len(df[:n])} tweets')
 
