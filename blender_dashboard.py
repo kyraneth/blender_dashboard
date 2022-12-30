@@ -74,8 +74,10 @@ except:
 
 with tab1:
 
-  col1, col2, col3 = st.columns(3)
+  
   header=st.container()
+  with header:
+    col1, col2, col3 = st.columns(3)
   with header:
     with col1:
       if st.button('Generate data'):
@@ -109,7 +111,7 @@ with tab1:
           df = df[df['engagement_score'] >= f]  
       with table:
         st.dataframe(df[['URL', 'engagement_score', 'like_count', 'reply_count', 'retweet_count', 'quote_count', 'created_at', 'tweet_text', 'tweet_author']][:n],
-                     width=1300, height=300)
+                     width=1000, height=300)
       with header:
         with col3:
           st.markdown(f'Showing top {len(df[:n])} tweets')
