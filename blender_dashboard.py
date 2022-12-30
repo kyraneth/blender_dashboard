@@ -95,6 +95,7 @@ with tab1:
     with header:
       with col2:
         if time_difference.total_seconds() / 3600 > 1:
+          st.markdown(":red[Data might be out of date, generate data]")
           st.write("Data might be out of date, generate data")
         else:
           st.write("Data less than 1 hour old")
