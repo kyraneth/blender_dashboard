@@ -179,7 +179,7 @@ with tab1:
           st.markdown(f'Showing top {len(df[:n])} tweets')
 
   except:
-      st.write("Please Generate Data")
+      st.write("Please Generate Twitter Data")
 
 
 
@@ -192,7 +192,7 @@ try:
   with open('search_date_reddit.txt', 'r') as f:
     search_date_reddit = f.read()
 except:
-  search_date_reddit = "No data generated yet"
+  search_date_reddit = "No Reddit data generated yet"
 
 with tab2:
 
@@ -209,7 +209,7 @@ with tab2:
 
   # Display the search date and a warning message if the data is more than 1 hour old
   table_2 = st.container()
-  if "No data generated yet" in search_date_reddit:
+  if "No Reddit data generated yet" in search_date_reddit:
     st.write(search_date_reddit)
   else:
     current_date_2 = datetime.datetime.now()
@@ -219,17 +219,17 @@ with tab2:
     with header_2:
       with col2_2:
         if time_difference_2.total_seconds() / 3600 > 1:
-          st.write(":red[Data might be out of date, generate data]")
+          st.write(":red[Reddit Data might be out of date, generate data]")
         else:
-          st.write(":green[Data less than 1 hour old]")
+          st.write(":green[Reddit Data less than 1 hour old]")
 
   df_2 = pd.read_csv('reddit_ranking.csv')
 
   try:
       n_2 = st.slider('Number of reddit posts to show', 10, 100)
-      filter_engagement_2 = st.checkbox('Filter by engagement score reddit')
+      filter_engagement_2 = st.checkbox('Filter by reddit engagement score')
       if filter_engagement_2:
-          f_2 = st.slider('filter engagement higher than reddit:', 0, 10)
+          f_2 = st.slider('filter reddit engagement higher than:', 0, 10)
           df_2 = df_2[df_2['engagement_score'] >= f_2]  
       with table_2:
         st.dataframe(df_2[['url']][:n_2],
@@ -239,4 +239,4 @@ with tab2:
           st.markdown(f'Showing top {len(df_2[:n_2])} reddit posts')
 
   except:
-      st.write("Please Generate Data")
+      st.write("Please Generate Reddit Data")
