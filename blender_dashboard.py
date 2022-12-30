@@ -219,7 +219,7 @@ with tab2:
     st.write(search_date_reddit)
   else:
     current_date_2 = datetime.datetime.now()
-    search_date_2 = datetime.datetime.strptime(search_date_twitter, "%A %d %B %Y, %H:%M")
+    search_date_2 = datetime.datetime.strptime(search_date_reddit, "%A %d %B %Y, %H:%M")
     time_difference_2 = current_date_2 - search_date_2
 
     with header_2:
