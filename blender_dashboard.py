@@ -153,7 +153,7 @@ with tab1:
     col1, col2, col3 = st.columns(3)
   with header:
     with col1:
-      if st.button('Generate data'):
+      if st.button('Generate Twitter data'):
 
         # Display the top tweets
         search_and_rank_tweets()
@@ -216,7 +216,7 @@ with tab2:
     col1_2, col2_2, col3_2 = st.columns(3)
   with header_2:
     with col1_2:
-      if st.button('Generate data'):
+      if st.button('Generate Reddit data'):
 
         # Display the top tweets
         search_rank_reddit()
