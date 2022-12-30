@@ -236,7 +236,7 @@ with tab2:
                      width=1000, height=300)
       with header_2:
         with col3_2:
-          st.markdown(f'Showing top {len(df[:n])} tweets')
+          st.markdown(f'Showing top {len(df_2[:n])} tweets')
 
   except:
       st.write("Please Generate Data")
