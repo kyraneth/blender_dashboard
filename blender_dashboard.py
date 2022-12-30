@@ -24,7 +24,8 @@ def search_and_rank_tweets():
   # Search for tweets
   tweets = tweepy.Paginator(client.search_recent_tweets, query=query,
                                        tweet_fields=['public_metrics','author_id','text','created_at'],
-                                       user_fields=['created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,url,username,verified'],
+                                       expansions=['entities.mentions.username','author_id'],
+                                       user_fields=['username']
                                        max_results=100).flatten(limit=100000)
 
   tweet_data = []
