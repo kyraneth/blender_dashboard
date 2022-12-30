@@ -106,7 +106,7 @@ def search_rank_reddit():
   with open('search_date_reddit.txt', 'w') as f:
     f.write(search_date_reddit)
 
-  df.to_csv('tweet_reddit.csv', index=False)
+  df.to_csv('reddit_ranking.csv', index=False)
 
   # Display the dataframe
   print(df)
