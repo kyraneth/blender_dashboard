@@ -6,6 +6,10 @@ import streamlit.components.v1 as components
 import praw
 
 ### TWITTER SEARCH FUNCTION #####
+
+st.set_page_config(layout="wide")
+
+
 def search_and_rank_tweets():
 
   # Enter your API keys and secrets here
@@ -117,7 +121,7 @@ GENERAL SECTION
 '''''''''''''''
 ''''''''''''''''''
 
-st.set_page_config(layout="wide")
+
 
 st.title('Geometry Nodes over the Last 7 Days')
 tab1, tab2 = st.tabs(["Twitter", "Reddit"])
