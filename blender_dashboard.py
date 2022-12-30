@@ -5,6 +5,8 @@ import datetime
 import streamlit.components.v1 as components
 
 st.set_page_config(layout="wide")
+
+st.title('Geometry Nodes over the Last 7 Days')
 tab1, tab2 = st.tabs(["Twitter", "Reddit"])
 # Enter your API keys and secrets here
 consumer_key = 'jIOfcFvFLUSPaQ4CoYtLuEA5E'
@@ -19,7 +21,6 @@ client = tweepy.Client(
 # Set the search term and time span
 query = '(Geometry Nodes OR geonodes OR geometrynodes) -is:retweet'
 
-st.title('Geometry Nodes over the Last 7 Days')
 
 def search_and_rank_tweets():
   # Search for tweets
