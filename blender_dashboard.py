@@ -8,7 +8,7 @@ st.set_page_config(layout="wide")
 
 st.title('Geometry Nodes over the Last 7 Days')
 tab1, tab2 = st.tabs(["Twitter", "Reddit"])
-col1, col2 = st.columns(2)
+
 # Enter your API keys and secrets here
 consumer_key = 'jIOfcFvFLUSPaQ4CoYtLuEA5E'
 consumer_secret = '1HBuH1xJPyWW1580NEkrKTkuR83tjqgU0kgvKmWth0sdFCdyiG'
@@ -74,6 +74,7 @@ except:
 
 with tab1:
 
+  col1, col2 = st.columns(2)
   header=st.container()
   with header:
     with col1:
