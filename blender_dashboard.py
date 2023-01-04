@@ -92,7 +92,7 @@ def search_rank_reddit():
           'content': submission.selftext,
           'URL': f"https://www.reddit.com{submission.permalink}",
           'engagement_score': (submission.score + submission.num_comments) / 2,
-          'created_at': submission.created_utc
+          'created_at': datetime.datetime.fromtimestamp(submission.created_utc).strftime('%Y-%m-%d %H:%M:%S')
       }
       # Add the dictionary to the list
       data_reddit.append(submission_data)
