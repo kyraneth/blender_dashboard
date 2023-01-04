@@ -91,7 +91,8 @@ def search_rank_reddit():
           'title': submission.title,
           'content': submission.selftext,
           'URL': f"https://www.reddit.com{submission.permalink}",
-          'engagement_score': (submission.score + submission.num_comments) / 2
+          'engagement_score': (submission.score + submission.num_comments) / 2,
+          'created_at': submission.created_utc
       }
       # Add the dictionary to the list
       data_reddit.append(submission_data)
@@ -233,7 +234,7 @@ with tab2:
           f_2 = st.slider('filter reddit engagement higher than:', 0, 10)
           df_2 = df_2[df_2['engagement_score'] >= f_2]  
       with table_2:
-        st.dataframe(df_2[['URL','engagement_score','title','upvotes','comments','user','content']][:n_2],
+        st.dataframe(df_2[['URL','engagement_score','title','created_at','upvotes','comments','user','content']][:n_2],
                      width=1000, height=300)
       with header_2:
         with col3_2:
